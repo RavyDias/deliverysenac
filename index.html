@@ -1,70 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Senac</title>
+    <link rel="stylesheet" href="delivery.css">
 </head>
+
 <body>
-    <h1>Delivey Senac</h1>
+    <nav class="navegacao">
+        <ul>
+            <li><a href="./index.html">🍕 Delivery</a></li>
+            <li><a href="#">+ Pizza</a></li>
+            <li><button id="abrirCarrinho">🛒</button></li>
+        </ul>
+    </nav>
+    <ul id="cardapio">
+
+    </ul>
+    <div id="checkout" class="checkout">
+        <button id="fecharCarinho">❌</button>
+        <h2>Pedido</h2>
+        <ul id="carrinho"></ul>
+    </div>
 
     <div id="exibir"></div>
     <script>
-        let pizza1 = {
-            nome: "calabresa",
-            ingredientes: ["Calabresa", "Cebola", 'Mussarela'],
-            valor: 35.00,
-        };
-        let pizza2 = {
-            nome: 'portuguesa',
-            ingredientes: ['Mussarela', 'Presunto', 'Ovo', 'Tomate'],
-            valor: 40.00,
-        };
-        
-        let cardapio = [pizza1, pizza2];
-        /*console.log('Cardápio da pizzaria Senac: ')
-        cardapio.forEach(pizza => {
-            console.log(`Pizza: ${pizza.nome}, valor: ${pizza.valor.toFixed(2)}`)
-        });*/
 
-        let pizza3 = {
-            nome: 'Frango com catupiry',
-            ingredientes: ['Frango desfiado', 'Catupiry'],
-            valor: 40.00,
-        };
-        let pizza4 = {
-            nome: 'Atum',
-            ingredientes: ['Mussarela', 'Atum'],
-            valor: 45.00,
-        };
-        let pizza5 = {
-            nome: 'Brócolis',
-            ingredientes: ['Mussarela', 'Brócolis', 'Ervilha', 'Milho', 'Tomate', 'Cebola'],
-            valor: 45.00,
-        };
-        let pizza6 = {
-            nome: 'Mussarela',
-            ingredientes: ['Mussarela', 'Tomate'],
-            valor: 35.00,
-        };
-        let pizza7 = {
-            nome: 'Batata',
-            ingredientes: ['Mussarela', 'Batata Frita', 'Presunto'],
-            valor: 40.00,
-        };
+        let cardapio = [
+            {
+                foto: "imgs/Pizza1.jpg",
+                nome: "calabresa",
+                ingredientes: ["Calabresa", "Cebola", 'Mussarela'],
+                valor: 35.00
+            },
+            {
+                foto: "imgs/Pizza2.jpg",
+                nome: 'portuguesa',
+                ingredientes: ['Mussarela', 'Presunto', 'Ovo', 'Tomate'],
+                valor: 40.00,
+            },
 
-        cardapio.push(pizza3, pizza4, pizza5, pizza6, pizza7);
+            /*console.log('Cardápio da pizzaria Senac: ')
+            cardapio.forEach(pizza => {
+                console.log(`Pizza: ${pizza.nome}, valor: ${pizza.valor.toFixed(2)}`)
+            });*/
 
-       /* cardapio.forEach(pizza => {
-            console.log(`Pizza: ${pizza.nome}, Valor: ${pizza.valor.toFixed(2)}`)
-        });*/
+            {
+                foto: "imgs/Pizza3.jpg",
+                nome: 'Frango com catupiry',
+                ingredientes: ['Frango desfiado', 'Catupiry'],
+                valor: 40.00,
+            },
+            {
+                foto: "imgs/Pizza4.jpg",
+                nome: 'Atum',
+                ingredientes: ['Mussarela', 'Atum'],
+                valor: 45.00,
+            },
+            {
+                foto: "imgs/Pizza5.jpg",
+                nome: 'Brócolis',
+                ingredientes: ['Mussarela', 'Brócolis', 'Ervilha', 'Milho', 'Tomate', 'Cebola'],
+                valor: 45.00,
+            },
+            {
+                foto: "imgs/Pizza6.jpg",
+                nome: 'Mussarela',
+                ingredientes: ['Mussarela', 'Tomate'],
+                valor: 35.00,
+            },
+            {
+                foto: "imgs/Pizza7.jpg",
+                nome: 'Batata',
+                ingredientes: ['Mussarela', 'Batata Frita', 'Presunto'],
+                valor: 40.00,
+            },
+        ]
 
-        const exibir = document.getElementById('exibir')
 
-        cardapio.forEach(pizza => {
-           exibir.innerHTML += (`<li> Pizza: ${pizza.nome}, Valor: ${pizza.valor.toFixed(2)} <br> `); 
-        });
 
+        /* cardapio.forEach(pizza => {
+             console.log(`Pizza: ${pizza.nome}, Valor: ${pizza.valor.toFixed(2)}`)
+         });*/
+
+        /* const exibir = document.getElementById('exibir')
+ 
+         cardapio.forEach(pizza => {
+             exibir.innerHTML += (`<li> Pizza: ${pizza.nome}, Valor: ${pizza.valor.toFixed(2)} <br> `);
+         });*/
+
+        const cardapioUl = document.getElementById('cardapio');
+        //zera a lista do cardápio
+        cardapioUl.innerHTML = "";
+        //repetição para exibir a lista de pizzas no cardapio (ul)
+        cardapio.forEach((pizza) => {
+            //cria um elemento <li> para inserir cada pizza na UL
+            const li = document.createElement('li');
+            //
+            li.className = "pizza";
+
+            const img = document.createElement('img')
+
+            img.src = pizza.foto
+
+            const ingredientesDiv = document.createElement('div');
+            ingredientesDiv.innerHTML = `(${pizza.ingredientes.join(', ')})`; //join transforma o array para texto, juntando todos os elementos dentro do array
+
+            ingredientesDiv.className = "ingredientes";
+
+            const button = document.createElement('button');
+
+            button.textContent = "COMPRAR 🛒";
+            li.appendChild(img);
+            li.append(`${pizza.nome} -R$ ${pizza.valor.toFixed(2)}`);
+            li.appendChild(ingredientesDiv);
+            li.appendChild(button);
+
+            cardapioUl.appendChild(li);
+        })
     </script>
 </body>
+
 </html>
